@@ -2,7 +2,7 @@ SRC = main.cpp
 
 OBJ = ${SRC:.cpp=.o}
 
-NAME = Whatever
+NAME = Iter
 
 CC = c++
 
