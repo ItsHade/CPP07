@@ -1,53 +1,51 @@
-#include <iostream>
-#include <Array.hpp>
+#include "Array.hpp"
 
-#define MAX_VAL 750
 int main(int, char**)
 {
-    Array<int> numbers(MAX_VAL);
-    int* mirror = new int[MAX_VAL];
-    srand(time(NULL));
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        const int value = rand();
-        numbers[i] = value;
-        mirror[i] = value;
-    }
-    //SCOPE
-    {
-        Array<int> tmp = numbers;
-        Array<int> test(tmp);
-    }
+    std::cout << "My tests!" << std::endl;
 
-    for (int i = 0; i < MAX_VAL; i++)
+    //constructor with not parameter
+    Array<int> array1; 
+    //constructor with parameter
+    Array<int> array2(10);
+    //different type
+    Array<std::string> stringArray(5);
+
+    std::cout << "Int array tests: " << std::endl;
+    for (int i = 0; i < 10; i++)
+        array2[i] = i * 2;
+    for (int i = 0; i < 10; i++)
+        std::cout << array2[i] << std::endl;
+    
+    std::cout << "Trying to access invalid indexs:" << std::endl;
+    try
     {
-        if (mirror[i] != numbers[i])
-        {
-            std::cerr << "didn't save the same value!!" << std::endl;
-            return 1;
-        }
+        array1[0] = -2;
+        std::cout << "No exception thrown" << std::endl;
+    }
+    catch (std::exception const & e)
+    {
+        std::cerr << e.what() << std::endl;
     }
     try
     {
-        numbers[-2] = 0;
+        array2[11] = 11;
+        std::cout << "No exception thrown" << std::endl;
     }
-    catch(const std::exception& e)
+    catch (std::exception const & e)
     {
-        std::cerr << e.what() << '\n';
-    }
-    try
-    {
-        numbers[MAX_VAL] = 0;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
+        std::cerr << e.what() << std::endl;
     }
 
-    for (int i = 0; i < MAX_VAL; i++)
+    std::cout << "String array tests:" << std::endl;
+    std::string str = "Hello";
+    for (int i = 0; i < 5; i++)
     {
-        numbers[i] = rand();
+        stringArray[i] = str;
+        str = str + "!";
     }
-    delete [] mirror;//
+    for (int i = 0; i < 5; i++)
+        std::cout << stringArray[i] << std::endl;
+
     return 0;
 }

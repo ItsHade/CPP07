@@ -2,7 +2,7 @@ SRC = main.cpp
 
 OBJ = ${SRC:.cpp=.o}
 
-NAME = Iter
+NAME = Array
 
 CC = c++
 
