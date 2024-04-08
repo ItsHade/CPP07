@@ -1,6 +1,6 @@
 #include "iter.hpp"
 
-static void increment(int & nb)
+void increment(int & nb)
 {
     ++nb;
     return ;
@@ -9,14 +9,25 @@ static void increment(int & nb)
 void toUpper(char & c)
 {
     c = toupper(c);
+    return ;
 }
 
 int main(void)
 {
-    size_t size = 5;
-    int array_int[5] = {4, 6, 12, 513, -124};
-    char array_char[6] = "hello";
-    ::iter<char []>(&array_char, size, printTemplate);
-    ::iter<int []>(&array_int, size, increment);
+    char arrayChar[6] = {"hello"};
+    std::cout << "Char array: " << std::endl;
+    ::iter(arrayChar, 5, printTemplate); // instanciated function template
+    std::cout << std::endl;
+    ::iter(arrayChar, 5, toUpper);
+    ::iter(arrayChar, 5, printTemplate);
+    std::cout << std::endl;
+    
+    std::cout << "Int array: " << std::endl;
+    int arrayInt[5] = {4, 6, 12, 513, -124};
+    ::iter(arrayInt, 5, printTemplate);
+    std::cout << std::endl;
+    ::iter(arrayInt, 5, increment);
+    std::cout << std::endl;
+    ::iter(arrayInt, 5, printTemplate);
     return (0);
 }
